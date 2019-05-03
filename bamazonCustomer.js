@@ -61,7 +61,6 @@ function start() {
 			type: 'input',
 			name: 'Quantity',
       // message: 'How many do you need?',
-			filter: Number
 		}
     ]).then(function(input) {
       console.log("You have selected: \n Item " + input.item + '\n Quantity ' + input.Quantity)
