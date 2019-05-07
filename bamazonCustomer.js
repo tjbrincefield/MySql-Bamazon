@@ -1,7 +1,7 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var colors = require('colors');
-// const cTable = require('console.table');;
+ require('console.table');
 
 colors.setTheme({
   silly: 'rainbow',
@@ -26,13 +26,18 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  chooseItem();
+  displayItems();
 });
 
 
-// function displayItems() {
-//   var table = mysql -uroot products --table < schema.sql;
-// }
+function displayItems() {
+  connection.query("SELECT * FROM products", function(err, results) {
+    if (err) throw err;
+
+    console.table(results);
+    chooseItem();
+
+});
 
 function chooseItem() {
   connection.query("SELECT * FROM products", function(err, results) {
@@ -64,6 +69,8 @@ function start() {
 		}
     ]).then(function(input) {
       console.log("You have selected: \n Item " + input.item + '\n Quantity ' + input.Quantity)
+      // I want this to show the item number as well as the quantity, so far it is only showing the quantity and the item as undefined - 
+        // how do i fix this?
         });
       };
       
